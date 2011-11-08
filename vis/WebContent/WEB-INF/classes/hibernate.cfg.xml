@@ -14,5 +14,7 @@
 		<property name="hbm2ddl.auto">create</property>
 		
 		<mapping resource="eshop/pojo/User.hbm.xml" />
+		<mapping class="eshop.pojo.Category" />
+		<mapping class="eshop.pojo.Product" />
 	</session-factory>
 </hibernate-configuration>
