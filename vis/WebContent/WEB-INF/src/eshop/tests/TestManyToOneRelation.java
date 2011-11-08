@@ -45,12 +45,26 @@ public class TestManyToOneRelation {
 		assertFalse(c.getProducts().isEmpty());
 		assertEquals(p.getCategory().getName(), "ASD");
 		
-		s = HibernateUtil.getSession();
-		t = s.beginTransaction();
-		s.createQuery("delete from Product").executeUpdate();
-		s.createQuery("delete from Category").executeUpdate();		
+		
+		/*
+		 * okay lets clean things up.
+		 * we have to remove the relationship otherwise hibernate will complain.
+		 */
+		c.getProducts().remove(c);
+		s.save(c);
+		s.delete(p);
+		s.delete(c);
+		
 		t.commit();
 		s.close();
+		
+//		s = HibernateUtil.getSession();
+//		t = s.beginTransaction();
+		
+//		s.createQuery("delete from Product").executeUpdate();
+//		s.createQuery("delete from Category").executeUpdate();		
+//		t.commit();
+//		s.close();
 	}
 
 }
