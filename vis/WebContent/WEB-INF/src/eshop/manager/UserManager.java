@@ -14,7 +14,8 @@ public class UserManager {
 	/*
 	 * @TODO: MD5 anyone?
 	 */
-	public static boolean authenticate(String username, String password) {
+	
+	public static User getUser(String username, String password) {
 		Session s = HibernateUtil.getSession();
 		Transaction t = s.beginTransaction();
 		
@@ -23,9 +24,13 @@ public class UserManager {
 		q.setString("password", password);
 		
 		User user = (User)q.uniqueResult();
-		
-		t.commit();
 		s.close();
+		return user;
+	}
+	
+	public static boolean authenticate(String username, String password) {
+		User user = getUser(username, password);
+	
 		return (user != null);
 	}
 	
@@ -38,6 +43,19 @@ public class UserManager {
 		s.save(user);
 		t.commit();
 		s.flush();
+		s.close();
+	}
+	
+	public static void deleteUser(String username, String password) {
+		deleteUser(getUser(username, password));
+	}
+	
+	public static void deleteUser(User user) {
+		Session s = HibernateUtil.getSession();
+		Transaction t = s.beginTransaction();
+		
+		s.delete(user);
+		t.commit();
 		s.close();
 	}
 	

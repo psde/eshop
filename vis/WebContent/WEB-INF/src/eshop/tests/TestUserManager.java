@@ -38,5 +38,12 @@ public class TestUserManager {
 		s.flush();
 		s.close();
 	}
+	
+	@Test 
+	public void testAddUser() {
+		UserManager.addUser("brat", "b");
+		assertTrue(UserManager.authenticate("brat", "b"));
+		UserManager.deleteUser("brat", "b");
+	}
 
 }
