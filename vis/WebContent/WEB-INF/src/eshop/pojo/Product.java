@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="products")
 public class Product implements Serializable {
 
 	/**
@@ -24,6 +23,12 @@ public class Product implements Serializable {
 	
 	public Product() {
 		
+	}
+	
+	public Product(String name, Integer cost, Category category) {
+		this.name = name;
+		this.cost = cost;
+		this.category = category;
 	}
 	
 	@Id
