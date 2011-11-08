@@ -1,0 +1,11 @@
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.url">jdbc:mysql://localhost/vis</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.username">root</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+		<property name="show_sql">true</property>
+		<property name="hbm2ddl.auto">create</property>
+	</session-factory>
+</hibernate-configuration>
