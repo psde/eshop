@@ -6,10 +6,14 @@ public class User implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8276035923596243251L;
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	private boolean admin;
+	
+	public User() {
+		
+	}
 	
 	public String getUsername() {
 		return username;
