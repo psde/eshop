@@ -10,7 +10,7 @@ import eshop.hibernate.HibernateUtil;
 import eshop.manager.UserManager;
 import eshop.pojo.User;
 
-public class TestAuthenticate {
+public class TestUserManager {
 
 	@Test
 	public void testNotExisting() {
