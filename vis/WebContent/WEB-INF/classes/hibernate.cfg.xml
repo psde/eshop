@@ -13,6 +13,6 @@
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">create</property>
 		
-		<mapping resource="vis/WebContent/WEB-INF/src/eshop/pojo/User.hbm.xml" />
+		<mapping resource="eshop/pojo/User.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

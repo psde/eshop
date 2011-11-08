@@ -13,6 +13,7 @@ public class HibernateUtil {
 			sessionFactory = new Configuration().configure().buildSessionFactory();
 		} catch (HibernateException ex) {
 			System.out.println("Hibernate session factory creation failed!");
+			System.out.println(ex.getLocalizedMessage());
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
