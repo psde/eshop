@@ -13,7 +13,7 @@
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">create</property>
 		
-		<mapping resource="eshop/pojo/User.hbm.xml" />
+		<mapping class="eshop.pojo.User" />
 		<mapping class="eshop.pojo.Category" />
 		<mapping class="eshop.pojo.Product" />
 	</session-factory>
