@@ -21,7 +21,19 @@ public class User implements Serializable {
 	}
 
 	public User() {
-		
+		/*
+		 * This constructor is required for Hibernate.
+		 */
+	}
+	
+	public User(long id, String username, String password, boolean admin) {
+		/*
+		 * Constructor for application and/or testing,
+		 */
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.admin = admin;
 	}
 	
 	public String getUsername() {
