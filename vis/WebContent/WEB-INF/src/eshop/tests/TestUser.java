@@ -11,7 +11,7 @@ public class TestUser {
 	private User user;
 	
 	public void setUp() {
-		this.user = new User(42, "borfd", "123", true);
+		this.user = new User("borfd", "123", true);
 	}
 	
 	@Test

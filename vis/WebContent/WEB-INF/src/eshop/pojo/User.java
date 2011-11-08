@@ -42,11 +42,10 @@ public class User implements Serializable {
 		 */
 	}
 	
-	public User(long id, String username, String password, boolean admin) {
+	public User(String username, String password, boolean admin) {
 		/*
 		 * Constructor for application and/or testing,
 		 */
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.admin = admin;

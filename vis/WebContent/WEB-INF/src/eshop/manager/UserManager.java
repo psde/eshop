@@ -11,7 +11,9 @@ import eshop.hibernate.HibernateUtil;
 import eshop.pojo.User;
 
 public class UserManager {
-	
+	/*
+	 * @TODO: MD5 anyone?
+	 */
 	public static boolean authenticate(String username, String password) {
 		Session s = HibernateUtil.getSession();
 		Transaction t = s.beginTransaction();
@@ -29,6 +31,14 @@ public class UserManager {
 	
 	public static void addUser(String username, String password) {
 		Session s = HibernateUtil.getSession();
+		Transaction t = s.beginTransaction();
+		
+		User user = new User(username, password, false);
+		
+		s.save(user);
+		t.commit();
+		s.flush();
+		s.close();
 	}
 	
 }

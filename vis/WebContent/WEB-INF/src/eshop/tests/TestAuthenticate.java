@@ -22,7 +22,7 @@ public class TestAuthenticate {
 		Session s = HibernateUtil.getSession();
 		Transaction t = s.beginTransaction();
 		
-		User user = new User(42, "borfd", "pew", true);
+		User user = new User("borfd", "pew", true);
 		
 		s.save(user);
 		t.commit();
