@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category", cascade = CascadeType.ALL)
 	private Set<Product> products = new HashSet<Product>();
 	private String name;
 	public Category() {

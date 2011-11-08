@@ -31,6 +31,7 @@ public class TestManyToOneRelation {
 		c.getProducts().add(p);
 		s.save(c);
 		t.commit();
+		s.flush();
 		s.close();
 		
 		s = HibernateUtil.getSession();
@@ -38,10 +39,16 @@ public class TestManyToOneRelation {
 		
 		List categories = s.createQuery("from Category").list();
 		c = (Category)categories.get(0);
-		assert(c.getProducts().contains(p));
+		List products = s.createQuery("from Product").list();
+		p = (Product)products.get(0);
 		
-		s.delete(c);
-		s.delete(p);
+		assertFalse(c.getProducts().isEmpty());
+		assertEquals(p.getCategory().getName(), "ASD");
+		
+		s = HibernateUtil.getSession();
+		t = s.beginTransaction();
+		s.createQuery("delete from Product").executeUpdate();
+		s.createQuery("delete from Category").executeUpdate();		
 		t.commit();
 		s.close();
 	}
