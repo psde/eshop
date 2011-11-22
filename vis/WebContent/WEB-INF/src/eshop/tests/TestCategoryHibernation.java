@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import eshop.hibernate.HibernateUtil;
 import eshop.pojo.Category;
-import eshop.pojo.User;
 
 public class TestCategoryHibernation {
 
@@ -27,10 +26,10 @@ public class TestCategoryHibernation {
 		
 		s = HibernateUtil.getSession();
 		t = s.beginTransaction();
-		List categories = s.createQuery("from Category").list();
+		List<Category> categories = s.createQuery("from Category").list();
 		assertEquals(1, categories.size());
 		
-		c = (Category)categories.get(0);
+		c = categories.get(0);
 		assertEquals("ASD", c.getName());
 		s.delete(c);
 		t.commit();

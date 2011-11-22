@@ -39,6 +39,28 @@ public class TestUserManager {
 		s.close();
 	}
 	
+	@Test
+	public void testExistingWithFalsePassword() {
+		Session s = HibernateUtil.getSession();
+		Transaction t = s.beginTransaction();
+		
+		User user = new User("borfd", "pew", true);
+		
+		s.save(user);
+		t.commit();
+		s.flush();
+		s.close();
+		
+		assertFalse(UserManager.authenticate("borfd", "obviously another password"));
+		
+		s = HibernateUtil.getSession();
+		t = s.beginTransaction();
+		s.delete(user);
+		t.commit();
+		s.flush();
+		s.close();
+	}
+	
 	@Test 
 	public void testAddUser() {
 		UserManager.addUser("brat", "b");

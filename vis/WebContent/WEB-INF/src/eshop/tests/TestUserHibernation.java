@@ -23,7 +23,7 @@ public class TestUserHibernation {
 		
 		s = HibernateUtil.getSession();
 		t = s.beginTransaction();
-		List users = s.createQuery("from User").list();
+		List<User> users = s.createQuery("from User").list();
 		assertEquals(1, users.size());
 		
 		user = (User)users.get(0);
