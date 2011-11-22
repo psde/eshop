@@ -1,9 +1,17 @@
 package eshop.action;
 
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.opensymphony.xwork2.ActionSupport;
 import eshop.manager.UserManager;
 
-public class Login extends ActionSupport {
+/*
+ * Our Action class which is responsible for authenticating a user and
+ * putting objects in users HTTP session (like username and whether is_admin).
+ */
+public class Login extends ActionSupport implements SessionAware {
 	/**
 	 * 
 	 */
@@ -17,6 +25,10 @@ public class Login extends ActionSupport {
 	private String username;
 	private String password;
 	/*
+	 * Field to store session context.
+	 */
+	private Map<String, Object> session;
+	/*
 	 * (non-Javadoc)
 	 * @see com.opensymphony.xwork2.ActionSupport#execute()
 	 */
@@ -25,6 +37,11 @@ public class Login extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/*
+	 * We could also validate directly in the execute() method but
+	 * we might as well use the validation interceptor provided by Struts2.
+	 * An addFieldError call will make the app behave as if execute() returned INPUT.
+	 */
 	public void validate() {
 		if(getUsername().length() == 0) {
 			addFieldError("username", "Username is required.");
@@ -52,6 +69,15 @@ public class Login extends ActionSupport {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		session = arg0;
+	}
+	
+	public Map getSession() {
+		return session;
 	}
 	
 }
