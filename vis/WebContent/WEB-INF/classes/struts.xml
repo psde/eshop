@@ -3,13 +3,18 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+	<constant name="struts.devMode" value="true" />
 	<package name="vis" extends="struts-default">
-
-		<!-- Wir definieren die Aktionen unserer Applikation. -->
+		<!-- Here we define the controllers and what happens after each one has finished executing. -->
 
 		<action name="Login" class="eshop.action.Login">
 			<result name="input">/Login.jsp</result>
-			<result name="success">/WEB-INF/jsp/Welcome.jsp</result>
+			<!-- If the user passed the validation we redirect him to the Products action. -->
+			<!-- We could furthermore specify GET parameters like this. -->
+			<!-- 
+			<param name="asd">dsa</param>
+			 -->
+			<result name="success" type="redirectAction">Products</result>
 		</action>
 		
 	</package>
