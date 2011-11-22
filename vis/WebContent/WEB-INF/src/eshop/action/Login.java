@@ -37,7 +37,7 @@ public class Login extends ActionSupport implements SessionAware {
 		/*
 		 * We assume the form has been validated so why dont we set a few session fields.
 		 */
-		getSession().put("user", getUsername());
+		getSession().put("username", getUsername());
 		getSession().put("loggedIn", true);
 		getSession().put("isAdmin", UserManager.getUser(getUsername(), getPassword()).isAdmin());
 		return SUCCESS;
