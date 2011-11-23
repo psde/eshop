@@ -17,7 +17,7 @@
 			<result name="success" type="redirectAction">Products</result>
 		</action>
 		
-		<action name="Products" class="eshop.action.Products">
+		<action method="listProducts" name="Products" class="eshop.action.Products">
 			<result name="success">/WEB-INF/src/eshop/jsp/Products.jsp</result>
 		</action>
 		

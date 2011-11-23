@@ -16,10 +16,10 @@ public class ProductManager {
 		Transaction t = s.beginTransaction();
 		
 		Query q = s.createQuery("from Product");
+		List<Product> result = q.list();
+
 		
-		s.close();
-		
-		return q.list();
+		return result;
 	}
 	
 	public static Product getProduct(Long id) {

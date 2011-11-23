@@ -8,6 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<s:property value="#session.username" />
+	<div id="greeting">
+		<p>
+			Hello <s:property value="#session.username" />! Welcome to the E-Shop!
+		</p>
+	</div>
+	<div id="products">
+		<s:iterator value="products">
+			<div class="product">
+				<s:property value="id" />
+				<s:property value="name" />
+				<s:property value="cost" />
+			</div>
+		</s:iterator>
+	</div>	
 </body>
 </html>
