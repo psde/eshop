@@ -7,7 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@NamedQueries({
+	@NamedQuery(
+			name = "getProduct",
+			query = "from Product p where p.id=:id"
+	)
+})
 
 @Entity
 public class Product implements Serializable {

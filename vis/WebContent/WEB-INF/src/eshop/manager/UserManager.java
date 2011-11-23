@@ -34,16 +34,26 @@ public class UserManager {
 		return (user != null);
 	}
 	
-	public static void addUser(String username, String password) {
-		Session s = HibernateUtil.getSession();
-		Transaction t = s.beginTransaction();
-		
+	public static boolean addUser(String username, String password) {
 		User user = new User(username, password, false);
+
+		Session s = HibernateUtil.getSession();
+		Transaction t = null;
 		
-		s.save(user);
-		t.commit();
-		s.flush();
-		s.close();
+		try {
+			t = s.beginTransaction();
+			
+			s.save(user);
+			
+			t.commit();
+			return true;
+		} catch(RuntimeException ex) {
+			if(t != null) t.rollback();
+			return false;
+		} finally {
+			s.close();
+		}
+		
 	}
 	
 	public static void deleteUser(String username, String password) {
