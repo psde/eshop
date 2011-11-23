@@ -16,10 +16,10 @@
 	<div id="products">
 		<s:iterator value="products">
 			<div class="product">
-				<s:property value="id" />
-				<s:property value="name" />
-				<s:property value="cost" />
-				<s:property value="category.name" />
+				<span class="product_id"><s:property value="id" /></span>
+				<span class="product_name"><s:property value="name" /></span>
+				<span class="product_cost"><s:property value="cost" /></span>
+				<span class="product_category"><s:property value="category.name" /></span>
 			</div>
 		</s:iterator>
 	</div>	
