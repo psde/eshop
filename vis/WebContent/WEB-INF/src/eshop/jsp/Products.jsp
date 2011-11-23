@@ -19,6 +19,7 @@
 				<s:property value="id" />
 				<s:property value="name" />
 				<s:property value="cost" />
+				<s:property value="category.name" />
 			</div>
 		</s:iterator>
 	</div>	
