@@ -38,9 +38,10 @@ public class TestManyToOneRelation {
 		t = s.beginTransaction();
 		
 		List categories = s.createQuery("from Category").list();
-		c = (Category)categories.get(0);
+		c = (Category)categories.get(categories.size()-1);
+		
 		List products = s.createQuery("from Product").list();
-		p = (Product)products.get(0);
+		p = (Product)products.get(products.size()-1);
 		
 		assertFalse(c.getProducts().isEmpty());
 		assertEquals(p.getCategory().getName(), "ASD");

@@ -20,6 +20,12 @@
 				<span class="product_name"><s:property value="name" /></span>
 				<span class="product_cost"><s:property value="cost" /></span>
 				<span class="product_category"><s:property value="category.name" /></span>
+				<s:url var="productDetails" action="productDetails">
+					<s:param name="productId">
+						<s:property value="id" />
+					</s:param>
+				</s:url>
+				<s:a href="%{productDetails}">details</s:a>
 			</div>
 		</s:iterator>
 	</div>	

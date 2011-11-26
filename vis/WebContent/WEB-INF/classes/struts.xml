@@ -14,11 +14,16 @@
 			<!-- 
 			<param name="asd">dsa</param>
 			 -->
-			<result name="success" type="redirectAction">Products</result>
+			<result name="success" type="redirectAction">listProducts</result>
 		</action>
 		
-		<action method="listProducts" name="Products" class="eshop.action.Products">
+		<action method="listProducts" name="listProducts" class="eshop.action.Products">
 			<result name="success">/WEB-INF/src/eshop/jsp/Products.jsp</result>
+		</action>
+		
+		<action method="productDetails" name="productDetails" class="eshop.action.Products">
+			<result name="success">/WEB-INF/src/eshop/jsp/ProductDetails.jsp</result>
+			<!--  <result name="input" type="redirectAction">Products</result> -->
 		</action>
 		
 	</package>
