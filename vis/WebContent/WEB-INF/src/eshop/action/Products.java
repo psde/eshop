@@ -20,7 +20,9 @@ public class Products extends ActionSupport implements SessionAware {
 	private Map session;
 	private List<Product> products;
 	
-	private String productId;
+	private Product product; /* for detail view */
+	
+	private Long productId;
 	
 	/*
 	 * CRUD entry point: List products
@@ -35,6 +37,7 @@ public class Products extends ActionSupport implements SessionAware {
 	 * CRUD entry point: detail view of a product
 	 */
 	public String productDetails() {
+		product = ProductManager.getProduct(productId);
 		return SUCCESS;
 	}
 	
@@ -59,12 +62,20 @@ public class Products extends ActionSupport implements SessionAware {
 		this.products = products;
 	}
 
-	public String getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 }
