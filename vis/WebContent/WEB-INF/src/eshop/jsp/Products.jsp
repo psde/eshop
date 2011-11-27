@@ -18,8 +18,7 @@
 			<div class="product">
 				<span class="product_id"><s:property value="id" /></span>
 				<span class="product_name"><s:property value="name" /></span>
-				<span class="product_cost"><s:property value="cost" /></span>
-				<span class="product_category"><s:property value="category.name" /></span>
+				
 				<s:url var="productDetails" action="productDetails">
 					<s:param name="productId">
 						<s:property value="id" />

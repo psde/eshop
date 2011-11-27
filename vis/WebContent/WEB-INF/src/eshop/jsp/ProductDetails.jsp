@@ -8,9 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div>
-PRODUCT DETAILS!
-<s:property value="product.name" />
-</div>
+	<div id="navigation">
+		<s:url var="listProducts" action="listProducts" />
+		<s:a href="%{listProducts}">back to product listing</s:a>
+	</div>
+	<div id="productForm">
+		<s:text name="label.name" /><span class="product_name"><s:property value="product.name" /></span>
+		<span class="product_cost"><s:property value="product.cost" /></span>
+		<span class="product_category"><s:property value="product.category.name" /></span>
+	</div>
 </body>
 </html>
