@@ -22,17 +22,32 @@ public class ProductManager {
 		return result;
 	}
 	
-	public static Product getProduct(Long id) {
+	public static Product getProduct(Long id) throws RuntimeException {
 		Session s = HibernateUtil.getSession();
-		Transaction t = s.beginTransaction();
+		Transaction t = null;
+		try {
+			t = s.beginTransaction();
 		
-		Query q = s.getNamedQuery("getProduct");
-		q.setLong("id", id);
+			Query q = s.getNamedQuery("getProduct");
+			q.setLong("id", id);
+			
+			Product p = (Product)q.uniqueResult();
+			
+			return p;
+		} catch(RuntimeException ex) {
+			System.out.println(ex.getLocalizedMessage());
+			throw ex;
+		} finally {
+			s.close();
+		}
+
+	}
+	
+	public static Product getProduct2(Long id) {
+		Session s = HibernateUtil.getSession();
 		
-		Product p = (Product)q.uniqueResult();
-		
+		Product p = (Product)s.load(Product.class, id);
 		s.close();
-		
 		return p;
 	}
 	
@@ -50,6 +65,34 @@ public class ProductManager {
 		} finally {
 			s.close();
 		}
+	}
+	
+	public static boolean updateProduct(Product p) {
+		
+		Session s = HibernateUtil.getSession();
+		Transaction t = null;
+		try {
+			t = s.beginTransaction();
+//			Product hp = getProduct(p.getId());
+//			s.evict(hp);
+//			hp.setName(p.getName());
+//			hp.setCost(p.getCost());
+//			hp.setCategory(p.getCategory());
+//			
+//			s.saveOrUpdate(hp);
+			p.getCategory().setName(p.getCategory().getName());
+			s.saveOrUpdate(p);
+			
+			t.commit();
+			return true;
+		} catch(RuntimeException ex) {
+			System.out.println(ex.getLocalizedMessage());
+			t.rollback();
+			return false;
+		} finally {
+			s.close();
+		}
+		
 	}
 	
 }

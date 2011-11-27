@@ -31,5 +31,6 @@
 			<result name="input">/WEB-INF/src/eshop/jsp/ProductForm.jsp</result>
 		</action>
 		
+		
 	</package>
 </struts>

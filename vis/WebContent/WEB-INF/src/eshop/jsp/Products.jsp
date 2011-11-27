@@ -20,16 +20,12 @@
 				<span class="product_name"><s:property value="name" /></span>
 				
 				<s:url var="productDetails" action="productDetails">
-					<s:param name="productId">
-						<s:property value="id" />
-					</s:param>
+					<s:param name="product.id" value="id" />
 				</s:url>
 				<s:a href="%{productDetails}">details</s:a>
 				<s:if test="#session.isAdmin eq true">
 					<s:url var="editProduct" action="insertOrUpdateProduct">
-						<s:param name="productId">
-							<s:property value="id" />
-						</s:param>
+						<s:param name="product.id" value="id" />
 					</s:url>
 					<s:a href="%{editProduct}">edit</s:a>
 				</s:if>

@@ -3,17 +3,20 @@ package eshop.action;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Session;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Preparable;
 
 import eshop.manager.CategoryManager;
 import eshop.manager.ProductManager;
 import eshop.pojo.Category;
 import eshop.pojo.Product;
 
-public class Products extends ActionSupport implements SessionAware {
+public class Products extends ActionSupport implements SessionAware, Preparable {
 
 	/**
 	 * 
@@ -24,8 +27,7 @@ public class Products extends ActionSupport implements SessionAware {
 	private List<Category> categories;
 	
 	private Product product; /* for detail view */
-	
-	private Long productId;
+
 	
 	/*
 	 * CRUD entry point: List products
@@ -40,14 +42,27 @@ public class Products extends ActionSupport implements SessionAware {
 	 * CRUD entry point: detail view of a product
 	 */
 	public String productDetails() {
-		product = ProductManager.getProduct(productId);
+		product = ProductManager.getProduct(product.getId());
 		return SUCCESS;
 	}
 	
-	public String insertOrUpdateProduct() {
-		product = ProductManager.getProduct(productId);
+	public void prepare() throws Exception {
 		categories = CategoryManager.getCategories();
+	}
+	
+	public String insertOrUpdateProduct() {		
+		product = ProductManager.getProduct(product.getId());
 		return INPUT;
+	}
+	
+	public String doSave() {
+		if (product.getId() == null) {
+			//ProductManager.insertProduct(product);
+			
+		} else {
+			ProductManager.updateProduct(product);
+		}	
+		return SUCCESS;
 	}
 	
 	@Override
@@ -59,9 +74,9 @@ public class Products extends ActionSupport implements SessionAware {
 		return session;
 	}
 	
-	public String execute() throws Exception {
-		return SUCCESS;
-	}
+//	public String execute() throws Exception {
+//		return SUCCESS;
+//	}
 
 	public List<Product> getProducts() {
 		return products;
@@ -71,13 +86,6 @@ public class Products extends ActionSupport implements SessionAware {
 		this.products = products;
 	}
 
-	public Long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
 
 	public Product getProduct() {
 		return product;
