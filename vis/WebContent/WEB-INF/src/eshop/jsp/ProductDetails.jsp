@@ -13,9 +13,11 @@
 		<s:a href="%{listProducts}">back to product listing</s:a>
 	</div>
 	<div id="productForm">
-		<s:text name="label.name" /><span class="product_name"><s:property value="product.name" /></span>
-		<span class="product_cost"><s:property value="product.cost" /></span>
-		<span class="product_category"><s:property value="product.category.name" /></span>
+		
+			<s:text name="label.name" /><span class="product_name"><s:property value="product.name" /></span>
+			<s:text name="label.cost" /><span class="product_cost"><s:property value="product.cost" /></span>
+			<s:text name="label.category" /><span class="product_category"><s:property value="product.category.name" /></span>
+	
 	</div>
 </body>
 </html>

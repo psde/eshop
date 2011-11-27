@@ -26,5 +26,10 @@
 			<!--  <result name="input" type="redirectAction">Products</result> -->
 		</action>
 		
+		<action method="insertOrUpdateProduct" name="insertOrUpdateProduct" class="eshop.action.Products">
+			<result name="success" type="redirectAction">listProducts</result>
+			<result name="input">/WEB-INF/src/eshop/jsp/ProductForm.jsp</result>
+		</action>
+		
 	</package>
 </struts>

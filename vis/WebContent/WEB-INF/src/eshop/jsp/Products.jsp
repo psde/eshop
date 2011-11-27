@@ -26,7 +26,7 @@
 				</s:url>
 				<s:a href="%{productDetails}">details</s:a>
 				<s:if test="#session.isAdmin eq true">
-					<s:url var="editProduct" action="editProduct">
+					<s:url var="editProduct" action="insertOrUpdateProduct">
 						<s:param name="productId">
 							<s:property value="id" />
 						</s:param>

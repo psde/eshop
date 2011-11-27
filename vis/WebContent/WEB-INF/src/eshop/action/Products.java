@@ -8,7 +8,9 @@ import org.hibernate.Session;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import eshop.manager.CategoryManager;
 import eshop.manager.ProductManager;
+import eshop.pojo.Category;
 import eshop.pojo.Product;
 
 public class Products extends ActionSupport implements SessionAware {
@@ -19,6 +21,7 @@ public class Products extends ActionSupport implements SessionAware {
 	private static final long serialVersionUID = 1L;
 	private Map session;
 	private List<Product> products;
+	private List<Category> categories;
 	
 	private Product product; /* for detail view */
 	
@@ -39,6 +42,12 @@ public class Products extends ActionSupport implements SessionAware {
 	public String productDetails() {
 		product = ProductManager.getProduct(productId);
 		return SUCCESS;
+	}
+	
+	public String insertOrUpdateProduct() {
+		product = ProductManager.getProduct(productId);
+		categories = CategoryManager.getCategories();
+		return INPUT;
 	}
 	
 	@Override
@@ -76,6 +85,14 @@ public class Products extends ActionSupport implements SessionAware {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 }
