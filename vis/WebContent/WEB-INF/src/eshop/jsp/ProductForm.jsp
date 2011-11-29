@@ -15,7 +15,13 @@
 <title><s:property value="#title"/></title>
 </head>
 <body>
-	Edit Product.
+	<div>
+		<p>
+			<s:url var="listProducts" action="listProducts" />
+			<s:a href="%{listProducts}">back to product listing</s:a>
+		</p>
+	</div>
+	<h2>Edit Product</h2>
 	<s:form action="insertOrUpdateProduct!save.action" method="post">
 		<s:text name="label.name" />
 		<s:textfield name="product.name" value="%{product.name}" />

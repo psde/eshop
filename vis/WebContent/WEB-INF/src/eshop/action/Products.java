@@ -26,13 +26,18 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 	private Product product; /* for detail view */
 
 	
+	private boolean isLoggedIn() {
+		Object isLoggedIn = session.get("loggedIn");
+		return isLoggedIn != null && ((Boolean)isLoggedIn).booleanValue();
+	}
+	
+	
 	/*
 	 * CRUD entry point: List products
 	 */
 	
 	public String listProducts() {
-		Object isLoggedIn = session.get("loggedIn");
-		if(isLoggedIn != null && ((Boolean)isLoggedIn).booleanValue()) {
+		if(isLoggedIn()) {
 			products = ProductManager.getAllProducts();
 			return SUCCESS;
 		} else {
@@ -44,8 +49,12 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 	 * CRUD entry point: detail view of a product
 	 */
 	public String productDetails() {
-		product = ProductManager.getProduct(product.getId());
-		return SUCCESS;
+		if(isLoggedIn()) {
+			product = ProductManager.getProduct(product.getId());
+			return SUCCESS;
+		} else {
+			return "login";
+		}
 	}
 	
 	public void prepare() throws Exception {
@@ -53,18 +62,26 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 	}
 	
 	public String insertOrUpdateProduct() {	
-		if(product != null && product.getId() != null)
-			product = ProductManager.getProduct(product.getId());
-		return INPUT;
+		if(isLoggedIn()) {
+			if(product != null && product.getId() != null)
+				product = ProductManager.getProduct(product.getId());
+			return INPUT;
+		} else {
+			return "login";
+		}
 	}
 	
 	public String doSave() {
-		if (product.getId() == null) {
-			ProductManager.addProduct(product);
+		if(isLoggedIn()) {
+			if (product.getId() == null) {
+				ProductManager.addProduct(product);
+			} else {
+				ProductManager.updateProduct(product);
+			}	
+			return SUCCESS;
 		} else {
-			ProductManager.updateProduct(product);
-		}	
-		return SUCCESS;
+			return "login";
+		}
 	}
 	
 	@Override
