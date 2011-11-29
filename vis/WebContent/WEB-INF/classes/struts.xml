@@ -6,7 +6,9 @@
 	<constant name="struts.devMode" value="true" />
 	<package name="vis" extends="struts-default">
 		<!-- Here we define the controllers and what happens after each one has finished executing. -->
-
+		<global-results>
+			<result name="login">/Login.jsp</result>
+		</global-results>
 		<action name="Login" class="eshop.action.Login">
 			<result name="input">/Login.jsp</result>
 			<!-- If the user passed the validation we redirect him to the Products action. -->
@@ -19,7 +21,6 @@
 		
 		<action method="listProducts" name="listProducts" class="eshop.action.Products">
 			<result name="success">/WEB-INF/src/eshop/jsp/Products.jsp</result>
-			<result name="login">/Login.jsp</result>
 		</action>
 		
 		<action method="productDetails" name="productDetails" class="eshop.action.Products">
