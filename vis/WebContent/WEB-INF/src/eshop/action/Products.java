@@ -3,11 +3,8 @@ package eshop.action;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Session;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
@@ -22,7 +19,7 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Map session;
+	private Map<String, Object> session;
 	private List<Product> products;
 	private List<Category> categories;
 	
@@ -76,7 +73,7 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 		session = arg0;	
 	}
 	
-	public Map getSession() {
+	public Map<String, Object> getSession() {
 		return session;
 	}
 	

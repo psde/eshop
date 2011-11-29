@@ -13,17 +13,24 @@ public class ProductManager {
 	
 	public static List<Product> getAllProducts() {
 		Session s = HibernateUtil.getSession();
-		Transaction t = s.beginTransaction();
-		
-		Query q = s.createQuery("from Product");
-		List<Product> result = q.list();
-
-		
-		return result;
+		@SuppressWarnings("unused")
+		Transaction t = null;
+		try {
+			
+			t = s.beginTransaction();
+			Query q = s.createQuery("from Product");
+			List<Product> result = q.list();
+			return result;
+		} catch (RuntimeException ex) {
+			throw ex;
+		} finally {
+			s.close();
+		}
 	}
 	
 	public static Product getProduct(Long id) throws RuntimeException {
 		Session s = HibernateUtil.getSession();
+		@SuppressWarnings("unused")
 		Transaction t = null;
 		try {
 			t = s.beginTransaction();
@@ -73,14 +80,7 @@ public class ProductManager {
 		Transaction t = null;
 		try {
 			t = s.beginTransaction();
-//			Product hp = getProduct(p.getId());
-//			s.evict(hp);
-//			hp.setName(p.getName());
-//			hp.setCost(p.getCost());
-//			hp.setCategory(p.getCategory());
-//			
-//			s.saveOrUpdate(hp);
-			//p.getCategory().setName(p.getCategory().getName());
+
 			s.merge(p);
 			
 			t.commit();
