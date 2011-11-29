@@ -12,6 +12,12 @@
 		<p>
 			Hello <s:property value="#session.username" />! Welcome to the E-Shop!
 		</p>
+		<s:if test="#session.isAdmin eq true">
+			<div>
+				<s:url var="addProduct" action="insertOrUpdateProduct" />
+				<s:a href="%{addProduct}">add new product</s:a>
+			</div>
+		</s:if>
 	</div>
 	<div id="products">
 		<s:iterator value="products">

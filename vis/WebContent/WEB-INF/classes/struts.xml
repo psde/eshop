@@ -19,6 +19,7 @@
 		
 		<action method="listProducts" name="listProducts" class="eshop.action.Products">
 			<result name="success">/WEB-INF/src/eshop/jsp/Products.jsp</result>
+			<result name="login">/Login.jsp</result>
 		</action>
 		
 		<action method="productDetails" name="productDetails" class="eshop.action.Products">

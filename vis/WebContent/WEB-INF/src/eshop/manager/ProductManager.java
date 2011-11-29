@@ -80,16 +80,18 @@ public class ProductManager {
 //			hp.setCategory(p.getCategory());
 //			
 //			s.saveOrUpdate(hp);
-			p.getCategory().setName(p.getCategory().getName());
-			s.saveOrUpdate(p);
+			//p.getCategory().setName(p.getCategory().getName());
+			s.merge(p);
 			
 			t.commit();
 			return true;
 		} catch(RuntimeException ex) {
-			System.out.println(ex.getLocalizedMessage());
+			System.out.println("ProductManager.updateProduct: " + ex.getLocalizedMessage());
 			t.rollback();
 			return false;
 		} finally {
+			s.flush();
+
 			s.close();
 		}
 		

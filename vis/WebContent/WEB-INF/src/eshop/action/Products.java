@@ -34,8 +34,13 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 	 */
 	
 	public String listProducts() {
-		products = ProductManager.getAllProducts();
-		return SUCCESS;
+		Object isLoggedIn = session.get("loggedIn");
+		if(isLoggedIn != null && ((Boolean)isLoggedIn).booleanValue()) {
+			products = ProductManager.getAllProducts();
+			return SUCCESS;
+		} else {
+			return "login";
+		}
 	}
 	
 	/*
@@ -50,14 +55,15 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 		categories = CategoryManager.getCategories();
 	}
 	
-	public String insertOrUpdateProduct() {		
-		product = ProductManager.getProduct(product.getId());
+	public String insertOrUpdateProduct() {	
+		if(product != null && product.getId() != null)
+			product = ProductManager.getProduct(product.getId());
 		return INPUT;
 	}
 	
 	public String doSave() {
 		if (product.getId() == null) {
-			//ProductManager.insertProduct(product);
+			ProductManager.addProduct(product);
 			
 		} else {
 			ProductManager.updateProduct(product);
