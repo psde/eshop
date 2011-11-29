@@ -61,7 +61,6 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 	public String doSave() {
 		if (product.getId() == null) {
 			ProductManager.addProduct(product);
-			
 		} else {
 			ProductManager.updateProduct(product);
 		}	

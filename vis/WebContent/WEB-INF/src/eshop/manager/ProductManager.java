@@ -82,7 +82,11 @@ public class ProductManager {
 		Transaction t = null;
 		try {
 			t = s.beginTransaction();
-
+			/*
+			 * Merge uses object identifiers to check on the existence of p in the persistence context.
+			 * If another existence exists (that's the case then updateProduct is called from the unit tests),
+			 * it copies the state of the detached object into the existing persistence object.
+			 */
 			s.merge(p);
 			
 			t.commit();

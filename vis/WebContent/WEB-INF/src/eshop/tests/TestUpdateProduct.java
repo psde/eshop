@@ -55,7 +55,7 @@ public class TestUpdateProduct {
 			Category c2 = (Category)s.load(Category.class, categoryId);
 			
 			s.delete(p2);
-			//s.delete(c);
+			s.delete(c2);
 			t.commit();
 		
 		} catch (RuntimeException ex) {
