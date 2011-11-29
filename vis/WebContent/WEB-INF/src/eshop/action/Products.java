@@ -31,6 +31,10 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 		return isLoggedIn != null && ((Boolean)isLoggedIn).booleanValue();
 	}
 	
+	private boolean isAdmin() {
+		Object isAdmin = session.get("isAdmin");
+		return isAdmin != null && ((Boolean)isAdmin).booleanValue();
+	}
 	
 	/*
 	 * CRUD entry point: List products
@@ -62,7 +66,7 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 	}
 	
 	public String insertOrUpdateProduct() {	
-		if(isLoggedIn()) {
+		if(isLoggedIn() && isAdmin()) {
 			if(product != null && product.getId() != null)
 				product = ProductManager.getProduct(product.getId());
 			return INPUT;
@@ -72,7 +76,7 @@ public class Products extends ActionSupport implements SessionAware, Preparable 
 	}
 	
 	public String doSave() {
-		if(isLoggedIn()) {
+		if(isLoggedIn() && isAdmin()) {
 			if (product.getId() == null) {
 				ProductManager.addProduct(product);
 			} else {
