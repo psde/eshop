@@ -22,6 +22,7 @@ public class ProductManager {
 			List<Product> result = q.list();
 			return result;
 		} catch (RuntimeException ex) {
+			if(t != null) t.rollback();
 			throw ex;
 		} finally {
 			s.close();
@@ -42,6 +43,7 @@ public class ProductManager {
 			
 			return p;
 		} catch(RuntimeException ex) {
+			if(t != null) t.rollback();
 			System.out.println(ex.getLocalizedMessage());
 			throw ex;
 		} finally {
@@ -87,7 +89,7 @@ public class ProductManager {
 			return true;
 		} catch(RuntimeException ex) {
 			System.out.println("ProductManager.updateProduct: " + ex.getLocalizedMessage());
-			t.rollback();
+			if(t != null) t.rollback();
 			return false;
 		} finally {
 			s.flush();
